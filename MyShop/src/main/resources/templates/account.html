@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>用户中心 | 乐购</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <style>
+        .nav > li > a {
+            color: #696763;
+        }
+
+        #order-table {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #order-table > thead > tr {
+            background: #FE980F;
+            color: white;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: normal;
+        }
+
+        #order-table .glyphicon-trash {
+            color: #999999;
+        }
+
+        #order-table img {
+            height: 60px;
+            width: 60px;
+        }
+
+        #address-table {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #address-table > thead > tr {
+            background: #f2f2f2;
+            color: black;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: normal;
+        }
+
+        .notif {
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: normal;
+        }
+
+        .notif > div {
+            margin-top: 10px;
+        }
+
+        .notif-status {
+            font-size: 12px;
+        }
+
+        .notif-head {
+            color: white;
+            background-color: #FE980F;
+        }
+
+        .notif-body {
+            font-size: 14px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: normal;
+            background-color: white;
+        }
+
+        #choose-image {
+            display: none;
+        }
+
+        #order-table .description {
+            width: 390px;
+        }
+    </style>
+</head><!--/head-->
+
+<body>
+<header id="header">
+    <div class="container header-box">
+        <div class="header-middle"><!--header-middle-->
+
+            <div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <a href="/index" style="position: absolute"><img src="images/home/perfectlogo.png"
+                                                                             class="logo-image"/></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8" style="padding-right: 30px">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/userInfoPage" style="background-color: transparent"><i
+                                        class="fa fa-user"></i><span id="user-name"> 用户名</span></a></li>
+                                <li><a href="/userInfoPage?kw=user-orders" style="background-color: transparent"><i
+                                        class="fa fa-list-alt"></i> 订单</a></li>
+                                <li><a href="/userInfoPage?kw=user-notification"
+                                       style="background-color: transparent"><i class="fa fa-envelope"></i> 消息<span
+                                        id="notif-no">0</span></a></li>
+                                <li><a href="/loginpage" style="background-color: transparent"><i
+                                        class="fa fa-lock"></i> 登入/出</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header-middle-->
+
+        <div class="header-bottom"><!--header-bottom-->
+            <div>
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-5">
+                        <div class="search_box">
+                            <input type="text" placeholder="在这里搜索任何项目" id="search-area"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 users-cart">
+                        <div class="cart-logo">
+                            <a href="cart.html"><i class="fa fa-shopping-cart"></i> 购物车 <span>0</span></a>
+                        </div>
+                        <div class="users-cart-info">
+                            <div id="none-tips" style="display: none;">购物车中还没有商品，赶紧选购吧！</div>
+                            <div id="have-info" class="table-responsive cart-inshort" style="">
+                                <table class="table">
+                                    <tbody id="cart-tbody">
+                                    <tr class="cart-tr-template">
+                                        <td class="cart-inshort-pic">
+                                            <a href=""><img src="images/cart/one.png" alt=""></a>
+                                        </td>
+                                        <td class="cart-inshort-des">
+                                            <span>Web ID: 1089772</span>
+                                        </td>
+                                        <td class="cart-inshort-pri">
+                                            <span>$59</span>x<span>1</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+        </div><!--/header-bottom-->
+        <div class="horizontal"></div>
+    </div>
+</header><!--/header-->
+<!--/header-->
+
+<section id="form"><!--form-->
+    <div class="container">
+        <div class="row fa-border" style="min-height: 500px">
+            <div class="col-sm-3">
+                <ul class="nav nav-pills nav-stacked text-center" id="shop-menu2">
+                    <li role="presentation" class="active">
+                        <a href="#user-info" data-toggle="tab">个人信息</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#user-orders" data-toggle="tab">我的订单</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#user-address" data-toggle="tab">收货地址</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#user-notification" data-toggle="tab">消息通知<span class="badge">3</span></a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#send-message" data-toggle="tab">发送消息</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-8 tab-content">
+                <div class="tab-pane fade active in login-form" id="user-info"><!--login form-->
+                    <h2>用户信息修改</h2>
+                    <div>
+                        <label>头像</label>
+                        <image id="user-info-image" src="images/head/boy.jpg"
+                               class="img-responsive img-circle center-block" height="100" width="100">
+                            <form method="post" id="submit-image" action="/fileUpload" enctype="multipart/form-data">
+                                <input type="file" id="choose-image" name="fileName"/></form>
+                        </image>
+                    </div>
+                    <form action="/changeUserInfo" method="post">
+                        <div>
+                            <label>用户名</label>
+                            <input id="user-info-name" type="text" class="form-control" placeholder="用户名"
+                                   name="userName"/>
+                        </div>
+                        <div>
+                            <label>邮箱</label>
+                            <input id="user-info-email" type="text" class="form-control" placeholder="用户名" disabled/>
+                        </div>
+                        <div>
+                            <label>生日</label>
+                            <input id="user-info-date" class="form-control" placeholder="2018-1-1" name="birthday"/>
+                        </div>
+                        <div>
+                            <label>密码</label>
+                            <input id="user-info-psw1" type="password" class="form-control" placeholder="密码"
+                                   name="userPassword"/>
+                        </div>
+                        <div>
+                            <label>确认密码</label>
+                            <input id="user-info-psw2" type="password" class="form-control" placeholder="确认密码"/>
+                        </div>
+                        <button type="submit" class="btn btn-default" onclick="return check()">保存</button>
+                    </form>
+                </div><!--/login form-->
+                <div class="tab-pane fade in" id="user-orders">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="order-table">
+                            <thead>
+                            <tr>
+                                <td>订单号</td>
+                                <td class="description text-center">商品详情</td>
+                                <td class="price text-center">价格</td>
+                                <td class="quantity text-center">数量</td>
+                                <td class="total text-center">合计</td>
+                                <td>订单状态</td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody class="text-center" id="order-info">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="user-address">
+                    <div class="login-form">
+                        <h2>新增收货地址</h2>
+                        <form action="/addUserAddress" method="post">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">详细地址<i>*</i></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="address" name="addressInfo">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">电话号码<i>*</i></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="电话号码" name="phoneNumber">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-10">
+										<span>
+											<input type="radio" value="true" class="form-control,checkbox"
+                                                   name="defaultAddress">
+											设置为默认收货地址
+										</span>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default" onclick="return checkAddress()">保存</button>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="address-table">
+                            <thead>
+                            <tr>
+                                <td>收货人邮箱</td>
+                                <td>详细地址</td>
+                                <td>电话</td>
+                                <td>操作</td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <tbody class="text-center" id="address-info">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="send-message">
+                    <div class="login-form">
+                        <h2>发送消息</h2>
+                        <form action="/sendMessage" method="post">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">发送人：<i>*</i></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="" name="senderId">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">发送到：<i>*</i></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="" name="recvId">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">内容：<i>*</i></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="" name="messageContent">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default" onclick="sendSucc()">发送</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="user-notification">
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/form-->
+
+<!--Footer-->
+<footer id="footer">
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+                <p class="pull-right">Designed by <span><a href="#">Our Team</a></span></p>
+            </div>
+
+            <!-- the row of footer below the copyright row -->
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</footer>
+<!--/Footer-->
+
+
+<script src="js/jquery.js"></script>
+<script src="js/price-range.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+<script src="js/account.js"></script>
+<script src="js/sweetalert.js"></script>
+<script src="js/header.js"></script>
+<script th:inline="javascript">
+
+    var errormessage = [[${error}]];
+    errorDialog(errormessage);
+
+    var successmessage = [[${success}]];
+    successDialog(successmessage);
+
+    function errorDialog(errormessage) {
+        if (null != errormessage) {
+            swal("", errormessage.toString(), "error");
+        }
+    }
+
+    function successDialog(successmessage) {
+        if (null != successmessage) {
+            swal("", successmessage.toString(), "success");
+        }
+    }
+
+    function sendSucc() {
+        swal("", "发送信息成功!", "success");
+    }
+</script>
+</body>
+</html>
