@@ -12,10 +12,7 @@ $(function () {
     var str = "";
     source.addEventListener('message', function (e) {
         var messageList = JSON.parse(e.data);
-        console.log("111")
-        console.log(messageList)
         var messageLength = messageList.length;
-        console.log(messageLength)
         $("#notif-no").text(messageLength);
     });
 })

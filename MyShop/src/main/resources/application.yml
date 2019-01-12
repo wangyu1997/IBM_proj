@@ -10,7 +10,7 @@ pagehelper:
 # path to save file(DO NOT ADD "/" AT THE END)
 # TODO: configure correct path
 web:
-     upload-path: /home/wangyu/Documents/Codes/java_projs/IBM_proj/MyShop/target/classes/static
+     upload-path: C://Codes/Java Proj/IBM_proj/MyShop/target/classes/static
 
 
 image:
@@ -36,7 +36,7 @@ spring:
 #      suffix: .html
 # 数据库连接
   datasource:
-    url: jdbc:mysql://localhost:3306/javaee?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://10.13.119.203:3306/javaee?characterEncoding=utf8&useSSL=false
     username: root
     password: 19970819wy
     driver-class-name: com.mysql.cj.jdbc.Driver
