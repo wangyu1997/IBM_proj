@@ -107,8 +107,7 @@ public class MessageService {
     @Transactional
     public List<Message> getUnreadMessage(String userID) {
         MessageExample messageExample = new MessageExample();
-        messageExample.createCriteria().andRecvIdEqualTo(userID);
-//        messageExample.createCriteria().andRecvIdEqualTo(userID).andIsReadEqualTo(false);
+        messageExample.createCriteria().andRecvIdEqualTo(userID).andIsReadEqualTo(false);
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
         MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
@@ -165,4 +164,11 @@ public class MessageService {
         List<Message> messageList = getUnreadMessage(userID);
         return messageList.size();
     }
+
+    public void updateMessage(Message message){
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
+        messageMapper.updateByPrimaryKey(message);
+    }
+
 }

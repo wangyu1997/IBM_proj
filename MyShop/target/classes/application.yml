@@ -1,0 +1,58 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+pagehelper:
+#  dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+
+# path to save file(DO NOT ADD "/" AT THE END)
+# TODO: configure correct path
+web:
+     upload-path: /Users/wangyu/Documents/Codes/Java_Projects/IBM_proj/MyShop/target/classes/static
+
+image:
+  user-image-folder-path: ${web.upload-path}/images/users
+  user-image-relate-path: /images/users
+  product-image-folder-path: ${web.upload-path}/images/products
+  product-image-relate-path: /images/products
+#  user-image-folder-path: /Users/xuyifan/Desktop/MyShop/src/main/resources/static/images/users/
+#  user-image-relate-path: /images/users
+#  product-image-folder-path: /Users/xuyifan/Desktop/MyShop/src/main/resources/static/images/users/
+#  product-image-relate-path: /images/products
+
+spring:
+  mvc:
+    static-path-pattern: /**
+  jackson:
+    time-zone: GMT+8
+#  #解决时间差
+#  jackson:
+#    time-zone: GMT+8
+
+#      prefix: /
+#      suffix: .html
+# 数据库连接
+  datasource:
+    url: jdbc:mysql://localhost:3306/javaee?characterEncoding=utf8&useSSL=false
+    username: root
+    password: 19970819wy
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      max-wait: 10000
+      max-active: 30
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      maximum-pool-size: 15
+      max-lifetime: 1800000
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+mybatis:
+  mapperlocations: /mapper/**Mapper.xml
+  type-aliases-package: edu.scu.my_shop.entity
+
+

@@ -89,6 +89,7 @@ public class ChangeUserInfoController {
 
         //设置头像
         user.setHeadImg(fileService.getUserImageURL(user.getUserId()));
+
         //封装当前用户
         Result result = new Result();
         result.setCode(200);

@@ -57,6 +57,7 @@ public class MessageController {
         System.out.println(message.toString());
         if (message.getSendTime() == null)
             message.setSendTime(new Date());
+        message.setIsRead(false);
         messageService.insertMessage(message);
         return "account";
     }
@@ -67,6 +68,11 @@ public class MessageController {
         SecurityUser userDetails = (SecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userID = userDetails.getUserId();
         List<Message> messages = messageService.getUnreadMessage(userID);
+        for (Message message:messages){
+            message.setIsRead(true);
+            messageService.updateMessage(message);
+            System.out.println(message.toString());
+        }
         System.out.println(messages.size());
         return messages;
     }
