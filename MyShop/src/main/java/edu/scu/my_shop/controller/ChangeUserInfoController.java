@@ -59,7 +59,6 @@ public class ChangeUserInfoController {
             user.setUserName(null);
         }
 
-        System.out.println(user.getBirthday());
 
         changeUserInfoService.changeUserInfo(user);
 
@@ -95,7 +94,6 @@ public class ChangeUserInfoController {
         result.setCode(200);
         result.setData(user);
 
-        System.out.println(user.getBirthday());
         return result;
     }
 }

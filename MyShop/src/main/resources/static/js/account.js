@@ -5,10 +5,10 @@ $(function () {
         var userimg = data.data.headImg;
         var useremail = data.data.userId;
         var userdate = data.data.birthday;
-        console.log(username);
-        // 打印用户信息
+         // 打印用户信息
         $('#user-info-name').attr('placeholder', username);
         $('#user-info-email').attr('placeholder', useremail);
+        $('#send_id').attr('value',useremail);
         if (null != userdate) {
             userdate = userdate.substring(0, 10);
             $('#user-info-date').attr('placeholder', userdate);
