@@ -102,6 +102,34 @@ public class FileService {
         sqlSession.close();
     }
 
+
+    public void insertProductImage(String productID, MultipartFile file) {
+
+        //  检查文件是否为空
+        if (file == null){
+            throw new FileException(EMPTY_FILE_MESSAGE, EMPTY_FILE);
+        }
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+        ImageMapper imageMapper = sqlSession.getMapper(ImageMapper.class);
+
+        // 文件重命名
+        String fileName = UUID.randomUUID().toString();
+        String fileAbsolutePath = productImageFolderPath + "/" + fileName;
+        uploadFile(fileAbsolutePath, file);
+
+        // 保存到数据库
+        Image image = new Image();
+        image.setImageId(fileName);
+        image.setImageUrl(fileName);
+        image.setProductId(productID);
+        imageMapper.insert(image);
+
+        sqlSession.close();
+    }
+
+
     /**
      * 重新替换图片
      *

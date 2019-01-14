@@ -53,12 +53,21 @@ public class FileController {
 
 
     @RequestMapping("multifileUpload")
-    @ResponseBody
-    public String uploadProductImages(@RequestParam("fileName")List<MultipartFile> files, @RequestParam("productID") String productID) {
+//    @ResponseBody
+    public void  uploadProductImages(@RequestParam("fileName")List<MultipartFile> files, @RequestParam("productID") String productID) {
         fileService.insertProductImages(productID, files);
-
         // TODO: redirect to new page
-        return "TODO: redirect to new page";
+//        return "redirect:userInfoPage?kw=user-info";
+    }
+
+    @RequestMapping("productImageUpload")
+    @ResponseBody
+    public String  uploadProductImage(@RequestParam("fileName")MultipartFile file, @RequestParam("productID") String productID) {
+        System.out.println(productID+"++++"+file.getName());
+        System.out.println(file.getSize()+"===");
+        fileService.insertProductImage(productID, file);
+        // TODO: redirect to new page
+        return "redirect:product/toEdit.html?productID="+productID;
     }
 
     @RequestMapping("multifileUpdate")
@@ -82,6 +91,6 @@ public class FileController {
         if (urlList.isEmpty()) {
             return null;
         }
-        return urlList.get(0);
+        return urlList.get(urlList.size()-1);
     }
 }
